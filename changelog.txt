@@ -1,0 +1,480 @@
+Fixes:
+ - Uzeraan Turmoil, Dark Tides, Collector, and Witch Apprentice quests now give proper magical items when completed. This fix is retroactive for items given previously
+ - Kindling can once again be harvested from trees
+ - Player vendor item description on pre-AOS servers is no longer localized (due to OSI changing that localized string)
+ - Banning players from houses now correctly bans their entire account
+ - Tamed good-aligned (InitialInnocent) creatures (kirins, unicorns) can no longer be attacked without becoming a criminal
+ - ValidIndirectTarget (used in area-affect spells, explosion potions, bs/ev summons, ...) now allows indirect attacks against good-aligned (InitialInnocent) creatures
+ - Potential server crash bug related to ThiefAI
+ - Fastwalk prevention now assigns a 0.1 second delay for turning
+ - Plant seeds now properly show their color when AOS is disabled
+ - Melee AI creatures will now follow only up to RangePerception*3, and they will actively reaquire targets after just RangePerception
+ - Bug fixed where PlayerRangeSensitive was not effective on all creatures after a server restart
+ - Mobiles which cannot regen a certain attribute (CanRegen*) will now have their timers stopped
+ - The tillerman will now give a message when a boats hold cannot be opened
+ - Items held during the last save before a restart will now be bounced on world load
+ - Plants will now check growth on world saves if the AutoRestart script is not enabled
+ - Player vendor ownership is now checked again on target to prevent buying from your own vendor
+ - Dead bonded pets can no longer be targeted with heal, greater heal, or close wounds spells
+ - Dropping items into, lifting items from, and using items inside locked containers is no longer allowed (exploit prevention)
+ - Dungeon regions 'Misc Dungeons' are now properly registered
+ - Frost spiders now deal cold damage instead of fire
+ - Combat restrictions from being frozen or paralyzed (AOS only) are now shared for ranged weapons
+ - Self repair weapons can no longer go above the hit point maximum
+ - Corrected misaligned orc cave region
+ - Fixed item holding bug triggered when looting innocent corpses in town
+ - BaseCreature AlterSpellDamageTo/From events are now functional
+ - Magic Arrow now properly implements damage delay
+ - Various weapons are now correctly registered in loot tables
+ - Pet control chance is now scaled correctly
+ - AOS Felucca gate warning is now shown even when gating to a Felucca town
+ - Line of sight paths are now swapped if necessary to resolve (very rare) situations where one player can cast on another but not be targeted back
+ - Pets can now harm other players that initiated an attack against their owner without flagging the pet or the owner criminal
+ - Pets can no longer be transfered when they have recently been in combat
+ - Anatomy and evaluating intelligence now properly apply the margin-of-error at lower skill levels
+ - Players may no longer steal from corpses
+ - The Dark Father will now correctly throw bones on uneven terrain
+ - Dark flower tapestry deeds facing east are now named correctly
+ - Detect Hidden skill now correctly messages if no players are revealed
+ - When a players pet kills another player (AOS enabled only) the insurance award is given to the pet owner
+ - When a players pet kills a red player, justice is given to the pet owner
+ - Bug fixed where meteor swarm and chain lightning spells would sometimes use the pvp damage algorithm even if not really attacking another player (AOS only)
+ - Integer math issue with scaling armor and weapon durability
+ - Changing AOS durability modifiers should now correctly scale and unscale durability
+ - It is no longer possible to get multiple resurrection gumps up for the same creature
+ - Serials can now be compared using condition commands (i.e. [global get name where mobile serial < 1000 )
+ - Status window is now loaded before items to resolve a bug where the 'strength requirement' of armor/weapons was shown as red until the status bar was loaded manually
+ - Vendor buy menu now shows full object properties in AOS, and correct titles pre-AOS
+ - Effects for the following events are no longer sent when triggered by hidden staff members:
+    - Inhuman monster speech (orc, ratmen, lizardmen, wisp)
+    - Monster statuette sounds
+    - Teleporter sounds and effects
+    - Public moongate sounds
+    - Monster notice sounds
+
+Additions:
+ - Factions
+ - Young system
+ - Player-vendor system overhaul, including contract-based vendors
+ - Moving crate system
+ - Speech log system used in verbal harassment pages
+ - Boat coarse plotting using maps
+ - Various Khaldun scripts & decoration
+ - Pet friend system, allowing multiple players to control movement commands for pets
+ - Instant logout via camping and bedrolls
+ - Secure trading restrictions
+ - Communication crystals
+ - Serpent pillar support
+ - Tokuno map support and preliminary decorations
+ - Bushido and Ninjitsu skill slots
+ - Statistic reporting framework
+ - Hit Lower Attack & Defense weapon properties now functional
+ - NightSight attribute to armor, clothing, and jewelry
+ - Protocol extension system allowing Krrios' client party tracking
+ - Character limiting interface, allows 1, 5, or 6 characters for the server
+ - Added OnBeforeSpawn and OnAfterSpawn events to Mobile and Item
+ - Commands:
+    - (Game Master) BringToPack : brings a targeted item to your backpack
+    - Property Accessors:
+       - Increase (Inc) command now supports branched properties ("[inc hair.hue 1")
+       - Set command now supports multiple properties ("[set hair.hue 2218 beard.hue 2218")
+       - Get command now supports multiple properties ("[get hair.hue beard.hue")
+ - Quests:
+    - Study of the Solen Hives (aka Naturalist)
+    - Solen Matriarch
+    - Ambitious Solen Queen
+ - Items:
+    - Misc:
+       - Bedroll
+       - BroadcastCrystal, ReceiverCrystal
+       - PowerGenerator
+       - BallotBox
+       - BallotBox(Addon|Deed)
+       - DartBoard
+       - DartBoardSouth(Addon|Deed)
+       - DartBoardEast(Addon|Deed)
+       - TheDryadBow (weapon artifact)
+       - IndecipherableMap - any map crafted outside of Trammel or Felucca
+       - Globe
+       - FireHorn
+       - SerpentPillar
+       - SoulStone
+    - Clothing:
+       - BearMask
+       - DeerMask
+       - TribalMask
+       - HornedTribalMask
+       - Artifacts:
+          - DivineCountenance
+          - HatOfTheMagi
+          - HuntersHeaddress
+          - SpiritOfTheTotem
+    - Solen Stuff:
+       - ZoogiFungus
+       - WaterVat(East|South)
+       - PowderOfTranslocation
+       - BagOfSending
+       - BallOfSummoning
+       - BraceletOfBinding
+    - Khaldun Stuff:
+       - PuzzleChest
+       - RaiseSwitch
+       - RaisableItem
+       - KhaldunPitTeleporter
+    - Predefined Books:
+       - BlackthornWelcomeBook
+       - KaburJournal
+       - FropozJournal
+       - DrakovsJourna
+       - TavarasJournal*
+       - GrimmochJournal*
+       - LysanderNotebook*
+       - TranslatedGargoyleJournal
+    - Gifts (UO 7th Anniversary)
+       - HearthOfHomeFire
+       - HolySword
+       - LeggingsOfEmbers
+       - RoseOfTrinsic
+       - SamuraiHelm
+       - ShaminoCrossbow
+       - TapestryOfSosaria
+    - Gifts (Winter 2004)
+       - DecorativeTopiary
+       - FestiveCactus
+       - LightOfTheWinterSolstice
+       - Mistletoe(Deed|Addon)
+       - PileOfGlacialSnow
+       - SnowPile
+       - SnowyTree
+    - Samurai Expansion:
+       - Misc:
+          - BookOfBushido
+          - BookOfNinjitsu
+          - BambooFlute
+       - Construction:
+          - BambooScreen
+          - ShojiScreen
+          - WindChimes
+          - FancyWindChimes
+          - Lights:
+             - PaperLantern
+             - RedHangingLantern
+             - RoundPaperLantern
+             - ShojiLantern
+             - WhiteHangingLantern
+       - Furniture:
+          - TallCabinet
+          - ShortCabinet
+          - RedArmoire
+          - CherryArmoire
+          - MapleArmoire
+          - ElegantArmoire
+          - PlainWoodenChest
+          - OrnateWoodenChest
+          - GildedWoodenChest
+          - WoodenFootLocker
+          - FinishedWoodenChest
+          - ElegantLowTable
+          - PlainLowTable
+       - Decoration:
+          - SmallUrn
+          - SmallTowerSculpture
+          - Addons:
+             - GozaMatEast(Addon|Deed)
+             - GozaMatSouth(Addon|Deed)
+             - SquareGozaMatEast(Addon|Deed)
+             - SquareGozaMatSouth(Addon|Deed)
+             - BrocadeGozaMatEast(Addon|Deed)
+             - BrocadeGozaMatSouth(Addon|Deed)
+             - BrocadeSquareGozaEast(Addon|Deed)
+             - BrocadeSquareGozaSouth(Addon|Deed)
+       - Clothing:
+          - Kasa
+          - ClothNinjaHood
+          - ClothNinjaJacket
+          - FemaleKimono
+          - Hakama
+          - HakamaShita
+          - JinBaori
+          - Kamishimo
+          - MaleKimono
+          - NinjaTabi
+          - Obi
+          - SamuraiTabi
+          - TattsukeHakama
+          - Waraji
+       - Weapons:
+          - Bokuto
+          - Daisho
+          - Kama
+          - Lajatang
+          - NoDachi
+          - Nunchaku
+          - Sai
+          - Tekagi
+          - Tessen
+          - Tetsubo
+          - Wakizashi
+          - Yumi
+       - Armor:
+          - ChainHatsuburi
+          - Leather:
+             - LeatherDo
+             - LeatherHaidate
+             - LeatherHiroSode
+             - LeatherJingasa
+             - LeatherMempo
+             - LeatherNinjaHood
+             - LeatherNinjaJacket
+             - LeatherNinjaMitts
+             - LeatherNinjaPants
+             - LeatherSuneate
+          - Studded:
+             - StuddedDo
+             - StuddedHaidate
+             - StuddedHiroSode
+             - StuddedMempo
+             - StuddedSuneate
+          - Plate:
+             - DecorativePlateKabuto
+             - HeavyPlateJingasa
+             - LightPlateJingasa
+             - PlateBattleKabuto
+             - PlateDo
+             - PlateHaidate
+             - PlateHatsuburi
+             - PlateHiroSode
+             - PlateMempo
+             - PlateSuneate
+             - SmallPlateJingasa
+             - StandardPlateKabuto
+       - Minor Artifacts:
+          - AdmiralsHeartRum
+          - AlchemistsBauble
+          - BlazeOfDeath
+          - BowOfTheJukaKing
+          - BurglarsBandana
+          - CaptainQuacklebushsCutlass
+          - CavortingClub
+          - DreadPirateHat
+          - GlovesOfThePugilist
+          - GwennosHarp
+          - NightsKiss
+          - NoxRangersHeavyCrossbow
+          - OrcishVisage
+          - PhillipsWoodenSteed
+          - PolarBearMask
+          - ShieldOfInvulnerability
+          - ShipModelOfTheHMSCape
+          - StaffOfPower
+          - VioletCourage
+          - ColdBlood
+          - GhostShipAnchor
+          - HeartOfTheLion
+          - PixieSwatter
+          - SeahorseStatuette
+          - WrathOfTheDryad
+ - Mobiles:
+    - DeathAdder (necromancer summon)
+    - Vendors:
+       - Thief
+       - Ranger
+       - Miner
+    - Monsters:
+       - ArcaneDaemon
+       - GargoyleDestroyer
+       - GargoyleEnforcer
+       - Cursed
+       - Doppleganger
+       - EnslavedGargoyle
+       - Juggernaut
+       - KhaldunRevenant
+       - Moloch
+       - ShadowFiend
+       - ExodusMinion
+       - ExodusOverseer
+    - Khaldun Characters:
+       - GrimmochDrummel
+       - LysanderGathenwale
+       - MorgBergen
+       - TavaraSewel
+    - For Quests:
+       - Study of the Solen Hives : Naturalist
+       - Solen Matriarch : [Red|Black]SolenMatriarch
+       - Ambitious Solen Queen : [Red|Black]AmbitiousSolenQueen
+
+Changes:
+ - Luck now provides a luck^(1/1.8) chance of repeating the item drop chance if it fails the first time, instead of luck^(1/8) to drop the item directly
+ - Artifacts 'the dragon slayer' and 'legacy of the dread lord' changed to artifact rarity 11
+ - Ethereal mounts now require 1 follower slot
+ - Animal lore is now checked every 'tick' when using animal taming
+ - Equiped items no longer drop to the casters feet when casting if their backpack is full
+ - 15-minute Justice protection delay is now only applied when protection is rejected
+ - Justice scroll benefits now require both players to be in the same general region
+ - Durability now affects weapon damage and armor absorbtion (pre-AOS only)
+ - Add commands now log created serials
+ - Weapon and armor durability loss changed to match OSI -- once durability reaches 0, the maximum durability will be decremented until it too reaches 0, only then will it be destroyed
+ - Stuck menu now teleports to a random location in the selected town, as well as correctly identifies when the target is in a T2A dungeon
+ - Studded armor now gives half meditation allowance (pre-AOS only)
+ - Large type-specific code in CraftItem changed to use an ICraftable interface
+ - Add-on type items turn to deed when a house is demolished
+ - Added base class DungeonRegion from which all dungeon regions inherit
+ - Test Center scripts now disabled by default; enable in Scripts/Misc/Test Center/TestCenter.cs
+ - Stolen items can no longer be traded, and they are now returned to the owner if the thief dies within 2 minutes of the item being stolen
+ - Peacemaked creatures now have a chance to become unpeacemaked when they become damaged
+ - Players may no longer store items in decoration containers
+ - Locked down (but not secure) containers now have a standard weight limit
+ - Treasure map system overhauled and youthful treasure maps added
+ - The account of clients is now shown when they disconnect
+ - Misc tweaks to match OSI:
+    - Combat blood effects
+    - Male guards no longer wear plate gorgets
+    - Mage guildmasters now hold a gnarled staff, and regular mage shopkeepers no longer do
+    - Bola balls are now properly hued
+    - Throwing bolas now cancels mounting ethereal horses as well as dropping any items the thrower is holding into their pack
+    - Barracoon now plays a sound when spawning rats
+    - Players may no longer get on a mount that is poisoned
+    - Small corrections in messages sent when rejecting a player from riding a mount
+    - Hit points can now be regenerated even while poisoned (Mobile.RegenThroughPoison, Mobile.GlobalRegenThroughPoison)
+    - NPC humans (wandering healers, ...) will no longer show spell mantras
+    - Animals and human NPCs can now move over blocking movable items (chests, ...)
+    - It is no longer possible to use the stuck menu in Felucca dungeons
+    - Boat keys are no longer newbied
+    - TasteID now works on potions and potion kegs, messages now appear over the target item
+    - Night sight is now a beneficial spell
+    - Commodity deeds are now blessed
+    - Chaos/Order guards are no longer bardable
+    - Floating damage display no longer is capped at 255
+    - Arms Lore, Item Identification, and Taste Identification can now be used on non-local items, including those on player vendors
+    - Discordance now checks harmful restrictions
+    - Arcane clothing max charges is now capped at 24 (was capped at 20)
+    - Added "fall damage" -- players now lose hp if they 'fall' more than one story
+    - The following weapons are now repairable:
+       - Tinkering:
+          - Cleavers
+          - Hatchets
+          - Pickaxes
+          - Butcher Knives
+          - Skinning Knives
+       - Carpentry:
+          - Clubs
+          - Black Staves
+          - Magic Wands
+       - Blacksmithy:
+          - Pitchforks
+ - AOS only:
+    - Creatures now regenerate health slightly faster than players
+    - Protection no longer blocks disruption of spirit speak
+    - White Wyrms now have an updated body value
+    - Containers can no longer be stolen
+    - Ancient smithy hammers can now be used when using runic hammers or enhancing
+    - Boat tillermen now show the boats decay state
+    - Shields no longer block passive meditation
+    - Staff of the Magi artifact is now a mage weapon with no penalty
+    - Mage weapon attribute no longer functions if the caster has less magery than he has in the real combat skill
+    - Runebooks and spellbooks (magery, chivalry, and necromancy) now show their blessed status
+    - Security level of game boards can now be changed
+    - Various artifact inconsistencies resolved
+    - Hit area damage from weapons now only hit valid indirect targets (like blade spirits, fields, etc..), and never the direct target
+    - Archery is no longer checked as a weapon skill when using a UBWS weapon
+    - Magic trapped containers' damage is no longer resistable
+    - Fire, poison, and paralyze fields no longer harm the caster
+    - Powder of Fortification can now increase armor and weapon maximum hit points to 255
+    - Using the stuck menu while inside a house will teleport you outside of it
+    - Combat-restrcted travel spells are now restricted even if you get attacked, not only when you attack someone else
+    - Paladin 'remove curse' spell now restores resistances lost when using the 'curse' magery spell
+    - Players under a necromancer transformation are no longer always attackable, they may now appear innocent
+    - Slayer titles are now displayed with the new localized names ('undead slayer' instead of 'silver,' etc)
+    - Shadow Knights can now only be revealed (with reveal or detect hidden spell) if you target their exact tile
+    - Bolas can now be thrown when armed; the armed weapon/shield will be dropped to the users backpack
+    - Pub24:
+       - Pack animals will no longer drop their content in a backpack when they die, they will be lootable as normal
+       - Players will no longer be allowed to enter a house when they have recently aggressed another player (excluding guild allies/enemies)
+       - Murderers are now allowed in guarded towns (felucca), but can not purchase from vendors
+       - Wither cast speed changed to 1.25 seconds (up from 1.0)
+       - Holy Light cast speed changed to 1.25 seconds (up from 1.0)
+       - Players must now wait 3 seconds to remount after -throwing- a bola
+    - Pub25:
+       - Faster casting capped at 2 (or 0 when using Protection)
+       - Paladin spells are subject to a cap of FC4 if they have under 70 magery
+       - PvP spell damage increase cap of 15% from an item’s magic property – spell damage increase is also derived from intelligence and inscription
+       - Added caps for: Lower Mana Cost = 40%, Hit Chance Increase = 45%, Defense Chance Increase = 45%, Damage Increase = 100%
+       - Maximum swing rate capped at one swing per second
+       - Added runic crafting tools, ethereal mounts, and all artifacts to test center bank boxess 
+       - Poisonstrike takes 1/2 second less to cast, 2 points higher minimum and maximum damage
+       - Cleanse by fire is now difficulty based
+       - Damage required to interrupt bandaging reduced from 26 to 19 for PvP only
+       - Lesser and normal healing potions have smaller delays to use than greater healing potions
+       - Lowered cure spell chance of success
+       - Archcure doesn't cure aggressors or victims and now casts 1/4th of a second faster
+       - Infectious strike special move now uses poisoning skill to help determine potency
+       - Using a special move within 3 seconds of the previous special move costs double mana
+       - Parried special moves have no mana cost
+       - Dexterity below 80 reduces the chance to parry
+       - Reveal uses magery and detect hidden vs. hide and stealth (but always reveals against the invisibility spell)
+       - Tracking players uses tracking and detect hidden and random (1 to 20) vs. hiding and stealth 
+       - Ghosts can no longer be tracked 
+       - Necromancy forms affect tracking difficulty
+       - Archers must hold still for a minimum of 1/2 second before firing
+       - Swamp dragons no longer reduce PvP damage
+    - Pub26:
+       - Changed gargoyle gems from 4 to 1d4
+       - Made the following creatures Bardable. 
+          - Orc Brute
+          - Golem (monster version)
+          - Gargoyle Destroyer
+          - Exodus Overseer
+          - Exodus Minion
+          - Jukan Lord
+          - Meer Warrior
+          - Betrayer
+          - Juggernaut
+          - Meer Captain
+          - Meer Eternal
+          - Bog Thing
+          - Vorpal Bunny
+          - Whipping Vines
+    - Pub27
+       - Added ingeniously drawn treasure maps (level 6) for Trammel and Felucca facets
+       - Added minor artifacts that will spawn in level 6 treasure chests & on the new leviathan sea creature
+       - Added minor artifacts that will spawn on paragon creatures in Ilshenar
+       - Paragons
+          - There will roughly be a 5% chance that any creature in Ilshenar will spawn as a Paragon of its kind. Paragon creatures are intended to enhance play for the Ilshenar facet. They are to provide a challenge to player characters who wish to partake in high end PvM. These creatures will test the mettle of player characters, and the more powerful creature templates are intended to require an adventuring group to battle. For comparison purposes, consider paragon creatures to be mini-champions of evil. In any case, an Ilshenar Champion of Evil will not spawn as a Paragon.
+          - Rather than greatly increasing damage output for paragons, they have been given buffs in their speed, regenerative capabilities, and hit points.
+          - Whenever a creature in Ilshenar spawns as a paragon, it is granted the following enhancements:
+             - Adds (Paragon) as the creature’s job title 
+             - Hues the creature gold 
+             - Removes the ability to tame the creature 
+             - Adds daemon target switching AI to creature 
+             - Increases poison hit strength by one if it has a poison attack (no greater than 5) 
+             - Multiplies creature’s maximum hit points by 5 
+             - Increases strength by 5%, intelligence and dexterity by 20% 
+             - Increases all skills by 20% 
+             - Modifies hit point, mana, and stamina base regeneration scaled based on the difficulty of the creature 
+             - Modifies speed of creature 
+             - Slightly increases the creature’s natural weapon class 
+             - Bumps up – or decreases if negative – fame and karma of creature by 40% (doesn’t bump up karma if karma is 0) 
+             - Will possess extra loot scaled based on its fame level 
+             - 10% chance that a paragon will spawn with a treasure chest equal to the treasure map level that it can possibly possess 
+                - If it doesn’t have a chance to possess a treasure map, then it doesn’t spawn a treasure chest 
+                - There are no guardians with these paragon treasure chests 
+                - Each chest will come in four different chest types, 11 different hues including the default hue, 8 colored ingot hues, Luna bank chest hue, and Umbra bank chest hue, and will possess the description of ‘recovered from (paragon)’. For example: recovered from a dragon (paragon) 
+                - These chests will contain about 20% of the loot normally found in current treasure chests of the appropriate difficulty level and will always possess a treasure map one level higher than the difficulty level of the chest 
+                - Unless otherwise stated, these treasure chests will function as current treasure chests (i.e., they’ll be appropriately locked and trapped) 
+          - Level 6 treasure chests will possibly spawn ancient wyrms, balrons, blood elementals, poison elementals, and titans. Level 6 treasure chests will always possess one minor artifact 
+    - Pub28:
+       - Added soul stones
+       - Changed runebook weight from 3 stones to 1 stone
+       - Removed SOS bottles from Wanderers of the Void in Doom. These Doom Guardians will now spawn with level 3 treasure maps instead (with the rare chance of a level 4 treasure map)
+       - Added variable weight and fisherman's mark on big fish, big fish trophy deed, and big fish trophy. Any big fish caught that is below 20 stones will not display weight or fisherman's mark
+       - Added bonsai seeds to SE creatures
+       - Adjusted treasure map spawn for the followign creatures:
+          - Meer Eternals (Level 5)
+          - Evil Mages (Level 1)
+          - Acid Elementals (Level 2)
+          - Evil Mage Lords (Level 2)
+          - Efreets (Level 4)
+          - Elder Gazers (Level 4)
+          - Ethereal Warriors (Level 5)
+    - Pub29
+       - Damage is now shown that is given to or from your pets, summons, and provoked creatures
